@@ -1,0 +1,42 @@
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.title {
+  font-family: "PT Sans Caption", sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 30px;
+  color: var(--dark-smoke);
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.forms .label {
+  font-weight: 600;
+  color: var(--dark-smoke);
+}
+
+.forms .input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  width: 18rem;
+  border: 1px solid var(--dark-snow);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .searchContainer {
+    padding: 1rem 1.25rem;
+  }
+}

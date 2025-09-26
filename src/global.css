@@ -1,0 +1,29 @@
+:root {
+  --white: #ffffff;
+  --snow: #f5f5f5;
+  --dark-snow: #e5e5e5;
+  --smoke: #8e8e8e;
+  --dark-smoke: #555555;
+  --dark-blue: #167abc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--dark-snow);
+  color: var(--dark-smoke);
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: "PT Sans Caption", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
