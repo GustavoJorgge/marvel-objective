@@ -5,7 +5,7 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <img
-          src="/public/logo.svg"
+          src="src/assets/logo.svg"
           alt="Logo da Objective em cor preta"
           className={styles.logo}
         />
