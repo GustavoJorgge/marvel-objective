@@ -1,9 +1,9 @@
-export const API_BASE = import.meta.env.VITE_API_BASE;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const MARVEL_PUBLIC_KEY = import.meta.env.VITE_MARVEL_PUBLIC_KEY;
 export const MARVEL_PRIVATE_KEY = import.meta.env.MARVEL_PRIVATE_KEY;
 
-if (!API_BASE) {
-  console.warn("VITE_API_BASE não definida!!!.");
+if (!BASE_URL) {
+  console.warn("VITE_BASE_URL não definida!!!.");
 }
 if (!MARVEL_PUBLIC_KEY) {
   console.warn("VITE_MARVEL_PUBLIC_KEY não definida!!!.");
