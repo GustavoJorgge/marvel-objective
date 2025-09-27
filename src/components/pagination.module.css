@@ -1,4 +1,5 @@
 .paginationContainer {
+  margin-top: 1rem;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   padding: 2rem 0;
