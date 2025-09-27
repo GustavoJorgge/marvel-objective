@@ -1,6 +1,6 @@
-import styles from "./searchPersonagens.module.css";
+import styles from "./searchCharacter.module.css";
 
-export function SearchPersonagens() {
+export function SearchCharacter() {
   return (
     <section className={styles.searchContainer}>
       <header>

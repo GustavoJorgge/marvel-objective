@@ -1,7 +1,8 @@
 import { useCharacters } from "../hooks/useCharacters";
-import styles from "./listPersonagens.module.css";
+import styles from "./listCharacter.module.css";
+import { Pagination } from "./pagination";
 
-export function ListPersonagens() {
+export function ListCharacters() {
   const { data: personagens, loading, error } = useCharacters(10);
 
   if (loading) {
@@ -66,6 +67,7 @@ export function ListPersonagens() {
           ))}
         </tbody>
       </table>
+      <Pagination />
     </section>
   );
 }

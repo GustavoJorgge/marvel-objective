@@ -1,7 +1,7 @@
 import "./global.css";
 import { Header } from "./components/header";
-import { SearchPersonagens } from "./components/searchCharacter";
-import { ListPersonagens } from "./components/listCharacter";
+import { SearchCharacter } from "./components/searchCharacter";
+import { ListCharacters } from "./components/listCharacter";
 import styles from "./App.module.css";
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
     <>
       <Header />
       <main className={styles.main}>
-        <SearchPersonagens />
-        <ListPersonagens />
+        <SearchCharacter />
+        <ListCharacters />
       </main>
     </>
   );
