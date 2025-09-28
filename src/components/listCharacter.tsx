@@ -2,8 +2,16 @@ import { useCharacters } from "../hooks/useCharacters";
 import styles from "./listCharacter.module.css";
 import { Pagination } from "./pagination";
 
-export function ListCharacters() {
-  const { data: personagens, loading, error } = useCharacters(10);
+export function ListCharacters({
+  nameStartsWith,
+}: {
+  nameStartsWith?: string;
+}) {
+  const {
+    data: personagens,
+    loading,
+    error,
+  } = useCharacters(10, nameStartsWith);
 
   if (loading) {
     return (
