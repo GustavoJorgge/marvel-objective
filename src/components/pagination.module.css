@@ -49,6 +49,16 @@
   gap: 0.3rem;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+}
+.arrowsButtons:disabled {
+  cursor: not-allowed;
+  color: var(--smoke);
+}
+
+.arrowsButtons:hover {
+  color: var(--light-blue);
 }
 
 .iconButton {
