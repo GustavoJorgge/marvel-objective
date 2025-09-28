@@ -1,6 +1,23 @@
+import { useEffect, useState } from "react";
 import styles from "./searchCharacter.module.css";
 
-export function SearchCharacter() {
+type SearchCharacterProps = {
+  onSearch?: (name: string) => void;
+};
+
+export function SearchCharacter({ onSearch }: SearchCharacterProps) {
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    if (onSearch) {
+      const delayDebounceFn = setTimeout(() => {
+        onSearch(search);
+      }, 500);
+
+      return () => clearTimeout(delayDebounceFn);
+    }
+  }, [search, onSearch]);
+
   return (
     <section className={styles.searchContainer}>
       <header>
@@ -18,6 +35,8 @@ export function SearchCharacter() {
             name="search"
             placeholder="Search"
             className={styles.input}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
