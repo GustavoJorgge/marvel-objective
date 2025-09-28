@@ -1,3 +1,4 @@
+import { useState, useEffect, useMemo } from "react";
 import { useCharacters } from "../hooks/useCharacters";
 import styles from "./listCharacter.module.css";
 import { Pagination } from "./pagination";
@@ -7,11 +8,24 @@ export function ListCharacters({
 }: {
   nameStartsWith?: string;
 }) {
+  const limit = 10;
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+  }, [nameStartsWith]);
+
   const {
     data: personagens,
+    total,
     loading,
     error,
-  } = useCharacters(10, nameStartsWith);
+  } = useCharacters(limit, page, nameStartsWith);
+
+  const totalPages = useMemo(
+    () => Math.max(1, Math.ceil(total / limit)),
+    [total, limit]
+  );
 
   if (loading) {
     return (
@@ -75,7 +89,8 @@ export function ListCharacters({
           ))}
         </tbody>
       </table>
-      <Pagination />
+
+      <Pagination page={page} totalPages={totalPages} onChange={setPage} />
     </section>
   );
 }

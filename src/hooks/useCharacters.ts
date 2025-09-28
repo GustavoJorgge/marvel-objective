@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { getCharacters } from "../api/getCharacters";
-import { getCharactersByName } from "../api/getCharactersByName";
+import { getCharacters, getCharactersByName } from "../api/getCharacters";
 import type { Character } from "../types/character";
 
-export function useCharacters(limit: number = 10, nameStartsWith?: string) {
+export function useCharacters(
+  limit: number = 10,
+  page: number = 1,
+  nameStartsWith?: string
+) {
   const [data, setData] = useState<Character[]>([]);
+  const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -13,28 +17,33 @@ export function useCharacters(limit: number = 10, nameStartsWith?: string) {
 
     const fetchData = async () => {
       try {
-        let chars: Character[];
-
+        const offset = (page - 1) * limit;
+        let res;
         if (nameStartsWith && nameStartsWith.trim() !== "") {
-          const res = await getCharactersByName({ limit, nameStartsWith });
-          chars = res.items;
+          res = await getCharactersByName({ limit, offset, nameStartsWith });
         } else {
-          chars = await getCharacters({ limit });
+          res = await getCharacters({ limit, offset });
         }
 
-        setData(chars);
+        setData(res.items);
+        setTotal(res.total ?? 0);
         setError(null);
         /* eslint-disable @typescript-eslint/no-explicit-any */
-      } catch (err: any) {
-        setError(err.message || "Erro ao buscar personagens");
+      } catch (err: unknown) {
+        const message =
+          err && typeof err === "object" && "message" in err
+            ? (err as any).message
+            : "Erro ao buscar personagens";
+        setError(message);
         setData([]);
+        setTotal(0);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [limit, nameStartsWith]);
+  }, [limit, page, nameStartsWith]);
 
-  return { data, loading, error };
+  return { data, total, loading, error };
 }
