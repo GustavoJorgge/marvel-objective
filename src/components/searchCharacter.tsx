@@ -12,7 +12,7 @@ export function SearchCharacter({ onSearch }: SearchCharacterProps) {
     if (onSearch) {
       const delayDebounceFn = setTimeout(() => {
         onSearch(search);
-      }, 500);
+      }, 200);
 
       return () => clearTimeout(delayDebounceFn);
     }

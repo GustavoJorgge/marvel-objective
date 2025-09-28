@@ -4,13 +4,21 @@ type FetchOptions = {
   limit?: number;
 };
 
+/* optei por colocar o AbortController para evitar chamadas da API desnecessarias conforme a digitação" */
+let controller: AbortController | null = null;
+
 export async function getCharactersByName({
   limit,
   nameStartsWith,
 }: FetchOptions & { nameStartsWith: string }) {
+  if (controller) controller.abort();
+  controller = new AbortController();
+
   const response = await api.get("/characters", {
     params: { limit, nameStartsWith },
+    signal: controller.signal,
   });
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const total = response.data.data.total as number;
   const items = response.data.data.results.map((char: any) => ({
