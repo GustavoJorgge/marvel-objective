@@ -43,6 +43,7 @@ Rodando localmente
 
 
 Melhorias futuras (curtos itens de roadmap)
+- Criar componente reutilizavel para aumentar/diminuir lista com dados dos personagens.
 - Cache / React Query para reduzir chamadas repetidas.
 - Skeleton loaders e lazy-loading de imagens por IntersectionObserver.
 - Suporte a imagens otimizadas (responsive srcset / WebP).
