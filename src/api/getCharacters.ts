@@ -56,3 +56,17 @@ export async function getCharactersByName({
   }));
   return { items, total };
 }
+
+export async function getCharacterById(id: number) {
+  const { data } = await api.get(`/characters/${id}`);
+  const result = data?.data?.results?.[0];
+  if (!result) throw new Error("Personagem não encontrado");
+  return {
+    id: result.id,
+    name: result.name,
+    description: result.description,
+    thumbnail: `${result.thumbnail.path}.${result.thumbnail.extension}`,
+    series: result.series.items.map((s: any) => s.name),
+    events: result.events.items.map((e: any) => e.name),
+  };
+}
