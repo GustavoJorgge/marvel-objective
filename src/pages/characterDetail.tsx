@@ -44,7 +44,8 @@ export function CharacterDetails() {
         <div className={styles.container}>
           <div>
             <button className={styles.Button} onClick={back}>
-              <ArrowLeft size={16} /> Voltar para a busca
+              <ArrowLeft size={16} className={styles.icon} /> Voltar para a
+              busca
             </button>
           </div>
           <div style={{ padding: 24 }}>Carregando...</div>

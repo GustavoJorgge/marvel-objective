@@ -90,7 +90,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.275rem;
   align-items: center;
   justify-content: center;
 }
@@ -98,6 +98,14 @@
 .CardIcon {
   color: var(--dark-blue);
 }
+
+.CardIcon svg,
+.CardIcon > svg {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+}
+
 .CardCount {
   font-weight: 700;
   font-size: 18px;
@@ -148,6 +156,9 @@
   .imageCard {
     height: 300px;
   }
+  .CardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .Cards {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -161,13 +172,22 @@
 
 @media (max-width: 480px) {
   .main {
-    padding: 1rem;
+    padding: 0.5rem;
   }
   .imageCard {
     height: 220px;
   }
+
+  .CardIcon svg,
+  .CardIcon > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
   .CardCount {
-    font-size: 1rem;
+    font-size: 0.875rem;
+  }
+  .CardLabel {
+    font-size: 0.875rem;
   }
   .title {
     font-size: 1.875rem;

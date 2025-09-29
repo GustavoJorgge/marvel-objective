@@ -73,13 +73,56 @@ th {
 }
 
 @media (max-width: 768px) {
+  .table thead {
+    display: none;
+  }
+
+  .table tbody {
+    display: block;
+  }
+
+  .table tbody tr {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 12px;
+    box-shadow: none;
+    padding: 8px;
+    background: transparent;
+  }
+  .table tbody tr td {
+    display: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  .table tbody tr td:first-child {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--white);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(16, 24, 40, 0.06);
+  }
+
   .seriesCol,
   .eventsCol {
     display: none;
   }
 
   .avatar {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+  }
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .metaList {
+    display: none;
   }
 }
