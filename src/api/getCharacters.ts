@@ -1,5 +1,6 @@
 import { api } from "./client";
 import type { Character } from "../types/character";
+import type { CharacterResult } from "../types/apiResult";
 
 type FetchOptions = {
   limit?: number;
@@ -57,16 +58,34 @@ export async function getCharactersByName({
   return { items, total };
 }
 
-export async function getCharacterById(id: number) {
-  const { data } = await api.get(`/characters/${id}`);
-  const result = data?.data?.results?.[0];
-  if (!result) throw new Error("Personagem não encontrado");
+
+export async function getCharacterById(id: number): Promise<CharacterResult> {
+  const response = await api.get(`/characters/${id}`, {
+    params: {
+      ts: 1,
+      apikey: import.meta.env.VITE_MARVEL_PUBLIC_KEY,
+      hash: import.meta.env.VITE_MARVEL_HASH,
+    },
+  });
+
+  const result = response.data.data.results[0];
+
   return {
-    id: result.id,
-    name: result.name,
+    character: {
+      id: result.id,
+      name: result.name,
+      thumbnail: `${result.thumbnail.path}.${result.thumbnail.extension}`,
+    },
     description: result.description,
-    thumbnail: `${result.thumbnail.path}.${result.thumbnail.extension}`,
+    counts: {
+      comics: result.comics.available,
+      series: result.series.available,
+      events: result.events.available,
+      stories: result.stories.available,
+    },
+    comics: result.comics.items.map((c: any) => c.name),
     series: result.series.items.map((s: any) => s.name),
+    stories: result.stories.items.map((s: any) => s.name),
     events: result.events.items.map((e: any) => e.name),
   };
 }

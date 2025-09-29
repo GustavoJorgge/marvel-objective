@@ -6,4 +6,11 @@ export type Character = {
   thumbnail: string;
   series: string[];
   events: string[];
+  description?: string;
+  counts?: {
+    comics: number;
+    series: number;
+    events: number;
+    stories: number;
+  };
 };

@@ -1,4 +1,5 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   BookOpenIcon,
@@ -7,39 +8,83 @@ import {
   Users,
 } from "@phosphor-icons/react";
 import styles from "./characterDetail.module.css";
+import { getCharacterById } from "../api/getCharacters";
+import type { CharacterResult } from "../types/apiResult";
 
 export function CharacterDetails() {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const page = Number(searchParams.get("page") ?? 1);
-  const name = searchParams.get("name") ?? "";
+  const [data, setData] = useState<CharacterResult | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const back = () =>
-    navigate(`/?page=${page}&name=${encodeURIComponent(name)}`);
+  useEffect(() => {
+    if (!id) return;
+    setLoading(true);
+    setError(null);
 
-  const sample = {
-    id: 1009446,
-    name: "3-D Man",
-    description:
-      "3-D Man é um super-herói com a habilidade de ver através de disfarces e ilusões. Ele possui força e agilidade sobre-humanas, além de poder detectar alienígenas Skrull.",
-    thumbnail:
-      "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg",
-    counts: { comics: 6, series: 3, events: 1, stories: 4 },
-    series: [
-      "Avengers: The Initiative (2007 - 2010)",
-      "Deadpool (1997 - 2002)",
-      "Marvel Premiere (1972 - 1981)",
-    ],
-    comics: [
-      "Avengers: The Initiative #1",
-      "Avengers: The Initiative #2",
-      "Deadpool #11",
-      "Marvel Premiere #35",
-      "Marvel Premiere #36",
-      "Marvel Premiere #37",
-    ],
-    stories: ["Cover #19947", "The 3-D Man", "The 3-D Man"],
-  };
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    getCharacterById(Number(id))
+      .then((res) => setData(res))
+      .catch((err: unknown) => {
+        const msg =
+          err && typeof err === "object" && "message" in err
+            ? (err as any).message
+            : "Erro ao carregar personagem";
+        setError(msg);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  const back = () => navigate(`/`);
+
+  if (loading) {
+    return (
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <div>
+            <button className={styles.Button} onClick={back}>
+              <ArrowLeft size={16} /> Voltar para a busca
+            </button>
+          </div>
+          <div style={{ padding: 24 }}>Carregando...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <div>
+            <button className={styles.Button} onClick={back}>
+              <ArrowLeft size={16} /> Voltar para a busca
+            </button>
+          </div>
+          <div style={{ padding: 24, color: "crimson" }}>{error}</div>
+        </div>
+      </div>
+    );
+  }
+
+  // fallback to empty layout if no data yet
+  if (!data) {
+    return (
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <div>
+            <button className={styles.Button} onClick={back}>
+              <ArrowLeft size={16} /> Voltar para a busca
+            </button>
+          </div>
+          <div style={{ padding: 24 }}>Nenhum dado.</div>
+        </div>
+      </div>
+    );
+  }
+
+  const { character, description, counts, comics, series, stories } = data;
 
   return (
     <div className={styles.main}>
@@ -53,22 +98,26 @@ export function CharacterDetails() {
         <div className={styles.Grid}>
           <div className={styles.imageCard}>
             <img
-              src={sample.thumbnail}
-              alt={sample.name}
+              src={character.thumbnail}
+              alt={character.name}
               className={styles.characterImage}
             />
           </div>
 
           <div className={styles.Content}>
-            <h1 className={styles.title}>{sample.name}</h1>
-            <p className={styles.description}>{sample.description}</p>
+            <h1 className={styles.title}>{character.name}</h1>
+            <p className={styles.description}>
+              {description && description.trim() !== ""
+                ? description
+                : "Sem descrição disponível."}
+            </p>
 
             <div className={styles.CardContainer}>
               <div className={styles.Card}>
                 <div className={styles.CardIcon}>
                   <BookOpenIcon size={32} />
                 </div>
-                <div className={styles.CardCount}>{sample.counts.comics}</div>
+                <div className={styles.CardCount}>{counts.comics}</div>
                 <div className={styles.CardLabel}>Comics</div>
               </div>
 
@@ -76,7 +125,7 @@ export function CharacterDetails() {
                 <div className={styles.CardIcon}>
                   <Users size={32} />
                 </div>
-                <div className={styles.CardCount}>{sample.counts.series}</div>
+                <div className={styles.CardCount}>{counts.series}</div>
                 <div className={styles.CardLabel}>Séries</div>
               </div>
 
@@ -84,7 +133,7 @@ export function CharacterDetails() {
                 <div className={styles.CardIcon}>
                   <Lightning size={32} />
                 </div>
-                <div className={styles.CardCount}>{sample.counts.events}</div>
+                <div className={styles.CardCount}>{counts.events}</div>
                 <div className={styles.CardLabel}>Eventos</div>
               </div>
 
@@ -92,7 +141,7 @@ export function CharacterDetails() {
                 <div className={styles.CardIcon}>
                   <BookOpenText size={32} />
                 </div>
-                <div className={styles.CardCount}>{sample.counts.stories}</div>
+                <div className={styles.CardCount}>{counts.stories}</div>
                 <div className={styles.CardLabel}>Histórias</div>
               </div>
             </div>
@@ -103,10 +152,10 @@ export function CharacterDetails() {
           <section className={styles.cardList}>
             <h2 className={styles.cardTitle}>
               <BookOpenIcon size={20} style={{ marginRight: 8 }} />
-              Comics ({sample.comics.length})
+              Comics ({comics.length})
             </h2>
             <ul className={styles.itemList}>
-              {sample.comics.map((c, i) => (
+              {comics.map((c, i) => (
                 <li key={i} className={styles.item}>
                   {c}
                 </li>
@@ -117,10 +166,10 @@ export function CharacterDetails() {
           <section className={styles.cardList}>
             <h2 className={styles.cardTitle}>
               <Users size={20} style={{ marginRight: 8 }} />
-              Séries ({sample.series.length})
+              Séries ({series.length})
             </h2>
             <ul className={styles.itemList}>
-              {sample.series.map((s, i) => (
+              {series.map((s, i) => (
                 <li key={i} className={styles.item}>
                   {s}
                 </li>
@@ -131,10 +180,10 @@ export function CharacterDetails() {
           <section className={styles.cardList}>
             <h2 className={styles.cardTitle}>
               <Users size={20} style={{ marginRight: 8 }} />
-              Histórias ({sample.stories.length})
+              Histórias ({stories.length})
             </h2>
             <ul className={styles.itemList}>
-              {sample.stories.map((s, i) => (
+              {stories.map((s, i) => (
                 <li key={i} className={styles.item}>
                   {s}
                 </li>

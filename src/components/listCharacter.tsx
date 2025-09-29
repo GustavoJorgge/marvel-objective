@@ -44,11 +44,7 @@ export function ListCharacters({
   const handleRowKey = (e: React.KeyboardEvent, id: number) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      navigate(
-        `/character/${id}?page=${page}&name=${encodeURIComponent(
-          nameStartsWith ?? ""
-        )}`
-      );
+      navigate(`/character/${id}`);
     }
   };
 
