@@ -29,6 +29,9 @@ th {
 }
 
 .table tbody tr td {
+  height: 72px;
+  overflow: hidden;
+  vertical-align: middle;
   background: var(--white);
   cursor: pointer;
   transition: box-shadow 0.3s;
@@ -63,8 +66,10 @@ th {
 .metaList {
   color: var(--dark-smoke);
   font-size: 0.875rem;
-  display: flex;
-  flex-direction: column;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .seriesCol,
