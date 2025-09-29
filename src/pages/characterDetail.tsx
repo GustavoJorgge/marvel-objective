@@ -69,7 +69,6 @@ export function CharacterDetails() {
     );
   }
 
-  // fallback to empty layout if no data yet
   if (!data) {
     return (
       <div className={styles.main}>
