@@ -50,8 +50,8 @@ export function CharacterDetails() {
           </button>
         </div>
 
-        <div className={styles.topGrid}>
-          <div className={styles.leftCard}>
+        <div className={styles.Grid}>
+          <div className={styles.imageCard}>
             <img
               src={sample.thumbnail}
               alt={sample.name}
@@ -59,7 +59,7 @@ export function CharacterDetails() {
             />
           </div>
 
-          <div className={styles.rightContent}>
+          <div className={styles.Content}>
             <h1 className={styles.title}>{sample.name}</h1>
             <p className={styles.description}>{sample.description}</p>
 
