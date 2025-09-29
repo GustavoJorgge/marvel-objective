@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SearchCharacter } from "../components/searchCharacter";
 import { ListCharacters } from "../components/listCharacter";
-import styles from "./Home.module.css";
+import styles from "./home.module.css";
 
 export function Home() {
   const [search, setSearch] = useState("");
