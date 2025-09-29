@@ -36,12 +36,6 @@
   color: var(--dark-smoke);
 }
 
-.candidateInfo {
-  font-size: 0.875rem;
-  font-weight: semibold;
-  color: var(--dark-smoke);
-}
-
 .avatar {
   padding: 0.5rem;
   display: grid;
@@ -82,5 +76,9 @@
     gap: 0.25rem;
     flex-direction: column;
     align-items: flex-end;
+  }
+
+  .candidateName {
+    font-size: 0.875rem;
   }
 }

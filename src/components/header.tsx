@@ -14,7 +14,7 @@ export function Header() {
         <div className={styles.candidate}>
           <div className={styles.candidateInfo}>
             <span className={styles.candidateName}>Gustavo Jorge</span>
-            <span className={styles.candidateRole}>Front-end</span>
+            <span className={styles.candidateRole}>Teste de Front-end</span>
           </div>
           <div className={styles.avatar} aria-hidden="true">
             GJ

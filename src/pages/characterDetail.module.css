@@ -5,6 +5,15 @@
   box-sizing: border-box;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 1.25rem;
+  color: var(--dark-smoke);
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -111,7 +120,6 @@
 }
 .CardLabel {
   font-size: 1rem;
-  font-weight: 500;
   color: var(--dark-smoke);
 }
 
@@ -182,10 +190,10 @@
     height: 1.5rem;
   }
   .CardCount {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .CardLabel {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .title {
     font-size: 1.875rem;

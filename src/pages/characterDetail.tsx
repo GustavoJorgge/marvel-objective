@@ -48,7 +48,7 @@ export function CharacterDetails() {
               busca
             </button>
           </div>
-          <div style={{ padding: 24 }}>Carregando...</div>
+          <div className={styles.loading}>Carregando...</div>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export function CharacterDetails() {
               <ArrowLeft size={16} /> Voltar para a busca
             </button>
           </div>
-          <div style={{ padding: 24, color: "crimson" }}>{error}</div>
+          <div className={styles.error}>{error}</div>
         </div>
       </div>
     );
@@ -78,7 +78,7 @@ export function CharacterDetails() {
               <ArrowLeft size={16} /> Voltar para a busca
             </button>
           </div>
-          <div style={{ padding: 24 }}>Nenhum dado.</div>
+          <div className={styles.loading}>Nenhum dado.</div>
         </div>
       </div>
     );
