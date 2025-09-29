@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# Marvel Objective — Entrega de Teste
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Resumo rápido
+- Projeto: Single Page App React + TypeScript que lista personagens (API Marvel) e mostra detalhe completo do personagem.
+- Objetivo: Seguir protótipo pré estabelecido no Teste Técnico, seguindo as regras de negocio e identidade visual.
 
-Currently, two official plugins are available:
+Demonstração
+- Deploy (Vercel): <[Marvel Objective](https://marvel-objective-peach.vercel.app/)>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Principais funcionalidades
+- Busca por nome com debounce.
+- Paginação (10 itens/página) responsiva — mobile mostra até 5 itens.
+- Tela de detalhe com imagem, descrição, contadores (comics / séries / eventos / histórias) e lista.
+- Layout responsivo e acessível.
+- Tratamento de erros e estados de loading.
+- Deploy contínuo via Vercel.
 
-## React Compiler
+Tech stack
+- Front: React + TypeScript (Vite)
+- Estilos: CSS Modules
+- HTTP: axios
+- Deploy: Vercel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Rodando localmente
+1. Instale dependências
+   ```npm install```
 
-## Expanding the ESLint configuration
+2. Duplique o arquivo .env.example e cole suas chaves Marvel:
+   Exemplo:
+   ```
+   VITE_MARVEL_PUBLIC_KEY=your_public_key
+   VITE_MARVEL_PRIVATE_KEY=your_private_key
+   VITE_BASE_URL=/
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. Rodar em desenvolvimento:
+   npm run dev
+   - Geralemente em http://localhost:5173
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+4. Build de produção:
+   npm run build
+   npm run preview
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Melhorias futuras (curtos itens de roadmap)
+- Cache / React Query para reduzir chamadas repetidas.
+- Skeleton loaders e lazy-loading de imagens por IntersectionObserver.
+- Suporte a imagens otimizadas (responsive srcset / WebP).
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Obrigado pela oportunidade! Aguardo Feedback
