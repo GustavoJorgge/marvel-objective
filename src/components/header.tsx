@@ -1,11 +1,12 @@
 import styles from "./header.module.css";
+import logo from "../assets/logo.svg";
 
 export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <img
-          src="src/assets/logo.svg"
+          src={logo}
           alt="Logo da Objective em cor preta"
           className={styles.logo}
         />
