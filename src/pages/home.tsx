@@ -9,7 +9,6 @@ export function Home() {
 
   return (
     <>
-      <Header />
       <main className={styles.main}>
         <SearchCharacter onSearch={setSearch} />
         <ListCharacters nameStartsWith={search} />
