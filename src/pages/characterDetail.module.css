@@ -142,16 +142,16 @@
 }
 
 @media (max-width: 960px) {
-  .topGrid {
+  .Grid {
     grid-template-columns: 1fr;
   }
-  .leftCard {
+  .imageCard {
     height: 300px;
   }
   .Cards {
     grid-template-columns: repeat(2, 1fr);
   }
-  .lowerGrid {
+  .infoGrid {
     grid-template-columns: 1fr;
   }
   .title {
@@ -163,13 +163,13 @@
   .main {
     padding: 1rem;
   }
-  .leftCard {
+  .imageCard {
     height: 220px;
   }
   .CardCount {
-    font-size: 16px;
+    font-size: 1rem;
   }
   .title {
-    font-size: 22px;
+    font-size: 1.875rem;
   }
 }
