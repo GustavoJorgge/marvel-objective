@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./searchCharacter.module.css";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 
 type SearchCharacterProps = {
   onSearch?: (name: string) => void;
@@ -37,7 +38,11 @@ export function SearchCharacter({ onSearch }: SearchCharacterProps) {
             className={styles.input}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            aria-label="Buscar personagem"
           />
+          <span className={styles.inputIcon} aria-hidden>
+            <MagnifyingGlass size={16} />
+          </span>
         </div>
       </div>
     </section>

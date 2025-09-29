@@ -31,7 +31,7 @@ export function ListCharacters({
 
   if (loading) {
     return (
-      <div>
+      <div className={styles.loading}>
         <p>Carregando personagens...</p>
       </div>
     );

@@ -4,6 +4,7 @@ import {
   CaretLeftIcon,
   CaretRightIcon,
 } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 import styles from "./pagination.module.css";
 
 export function Pagination({
@@ -15,7 +16,17 @@ export function Pagination({
   totalPages: number;
   onChange: (p: number) => void;
 }) {
-  const windowSize = 5;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth <= 600);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  const windowSize = isMobile ? 3 : 5;
+
   if (totalPages <= 1) return null;
 
   let start = Math.max(1, page - Math.floor(windowSize / 2));
