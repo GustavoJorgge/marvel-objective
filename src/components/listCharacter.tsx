@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useCharacters } from "../hooks/useCharacters";
 import styles from "./listCharacter.module.css";
 import { Pagination } from "./pagination";
+import { useNavigate } from "react-router-dom";
 
 export function ListCharacters({
   nameStartsWith,
@@ -10,6 +11,7 @@ export function ListCharacters({
 }) {
   const limit = 10;
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPage(1);
@@ -39,6 +41,17 @@ export function ListCharacters({
     console.error("Erro ao carregar personagens:", error);
   }
 
+  const handleRowKey = (e: React.KeyboardEvent, id: number) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      navigate(
+        `/character/${id}?page=${page}&name=${encodeURIComponent(
+          nameStartsWith ?? ""
+        )}`
+      );
+    }
+  };
+
   return (
     <section className={styles.tableWrap} aria-label="Lista de personagens">
       <table className={styles.table}>
@@ -52,12 +65,27 @@ export function ListCharacters({
 
         <tbody>
           {personagens.map((c) => (
-            <tr key={c.id} className={styles.row}>
+            <tr
+              key={c.id}
+              className={styles.row}
+              role="link"
+              tabIndex={0}
+              onClick={() =>
+                navigate(
+                  `/character/${c.id}?page=${page}&name=${encodeURIComponent(
+                    nameStartsWith ?? ""
+                  )}`
+                )
+              }
+              onKeyDown={(e) => handleRowKey(e, c.id)}
+              style={{ cursor: "pointer" }}
+              aria-label={`Ver detalhes de ${c.name}`}
+            >
               <td>
                 <div className={styles.character}>
                   <img
                     src={c.thumbnail}
-                    alt="Imagem do personagem"
+                    alt={c.name}
                     className={styles.avatar}
                   />
                   <div>

@@ -1,21 +1,15 @@
-import "./global.css";
-import { Header } from "./components/header";
-import { SearchCharacter } from "./components/searchCharacter";
-import { ListCharacters } from "./components/listCharacter";
-import styles from "./App.module.css";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {Home} from "./pages/home";
+import CharacterDetails from "./pages/characterDetail";
 
 function App() {
-  const [search, setSearch] = useState("");
-
   return (
-    <>
-      <Header />
-      <main className={styles.main}>
-        <SearchCharacter onSearch={setSearch} />
-        <ListCharacters nameStartsWith={search} />
-      </main>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/character/:id" element={<CharacterDetails />} />
+      </Routes>
+    </Router>
   );
 }
 
