@@ -1,16 +1,16 @@
 # Marvel Objective — Entrega de Teste
 
-Resumo rápido
+### Resumo rápido
 - Projeto: Single Page App React + TypeScript que lista personagens (API Marvel) e mostra detalhe completo do personagem.
 - Objetivo: Seguir protótipo pré estabelecido no Teste Técnico, seguindo as regras de negocio e identidade visual.
 
-# Observações quanto a bibliotecas
+### Observações quanto a bibliotecas
 - Utilizei o React-router-dom para melhorar a troca de paginas home -> characterDetail
 
-Demonstração
+### Demonstração
 - Deploy (Vercel): <[Marvel Objective](https://marvel-objective-peach.vercel.app/)>
 
-Principais funcionalidades
+### Principais funcionalidades
 - Busca por nome com debounce.
 - Paginação (10 itens/página) responsiva — mobile mostra até 5 itens.
 - Tela de detalhe com imagem, descrição, contadores (comics / séries / eventos / histórias) e lista.
@@ -18,13 +18,13 @@ Principais funcionalidades
 - Tratamento de erros e estados de loading.
 - Deploy contínuo via Vercel.
 
-Tech stack
+### Tech stack
 - Front: React + TypeScript (Vite)
 - Estilos: CSS Modules
 - HTTP: axios
 - Deploy: Vercel
 
-Rodando localmente
+### Executando Projeto
 1. Instale dependências
    ```npm install```
 
