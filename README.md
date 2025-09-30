@@ -4,6 +4,9 @@ Resumo rápido
 - Projeto: Single Page App React + TypeScript que lista personagens (API Marvel) e mostra detalhe completo do personagem.
 - Objetivo: Seguir protótipo pré estabelecido no Teste Técnico, seguindo as regras de negocio e identidade visual.
 
+# Observações quanto a bibliotecas
+- Utilizei o React-router-dom para melhorar a troca de paginas home -> characterDetail
+
 Demonstração
 - Deploy (Vercel): <[Marvel Objective](https://marvel-objective-peach.vercel.app/)>
 
